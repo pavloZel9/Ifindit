@@ -62,7 +62,7 @@ public class Main5Activity extends AppCompatActivity {
          String sh=getIntent().getStringExtra("s");
         Log.d("decod",sh);
 
-
+//
 
 
 

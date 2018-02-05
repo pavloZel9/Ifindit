@@ -19,11 +19,9 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
+import android.util.Base64;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,9 +33,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -62,10 +57,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -474,7 +466,7 @@ public void loda(){
     takePicture.setVisibility(View.INVISIBLE);
     b2.setVisibility(View.INVISIBLE);
     b3.setVisibility(View.INVISIBLE);
-
+/*
     if (hj1 == 0) {
         api = "LANDMARK_DETECTION";
 
@@ -486,7 +478,7 @@ public void loda(){
         u.setText("11%");
 
     }
-    if (hj1 == 3) {
+    if (hj1 == 1) {
         api = "LOGO_DETECTION";
 
         feature.setType(api);
@@ -497,7 +489,7 @@ public void loda(){
         u.setText("74%");
     }
 
-
+/*
     if (hj1 == 2) {
         api = "LABEL_DETECTION";
 
@@ -510,7 +502,7 @@ public void loda(){
 
     }
 
-
+/*
     if (hj1 == 300) {
         api = "SAFE_SEARCH_DETECTION";
 
@@ -532,8 +524,8 @@ public void loda(){
         }
         u.setText("66%");
 
-    }
-    if (hj1 == 1) {
+    }*/
+    if (hj1 == 0) {
         api = "WEB_DETECTION";
 
         feature.setType(api);
@@ -541,10 +533,10 @@ public void loda(){
             callCloudVision(bitmap, feature);
 
         }
-        u.setText("20%");
+
     }
     //////////////////////////////////////////////////////////////////
-    if (hj1 == 4) {
+  /*  if (hj1 == 4) {
 
 
 
@@ -570,6 +562,26 @@ public void loda(){
         Intent3.putStringArrayListExtra("wb1", wb);
         Intent3.putExtra("fname", detectedText);
         startActivity(Intent3);
+    }*/
+    if (hj1 == 1) {
+
+        takePicture.setVisibility(View.VISIBLE);
+
+        b2.setVisibility(View.VISIBLE);
+        b3.setVisibility(View.VISIBLE);
+        u.setText("");
+
+
+
+        Intent Intent3 = new Intent(MainActivity.this, Main5Activity.class);
+      //  Intent3.putStringArrayListExtra("La_d", La_d);
+        Intent3.putStringArrayListExtra("wb1", wb);
+        String decode=toBase64();
+        Intent3.putExtra("s",decode);
+        Log.d("decod",decode);
+       // Intent3.putExtra("fname", detectedText);
+        startActivity(Intent3);
+
     }
     hj1++;
     }
@@ -619,7 +631,7 @@ public void loda(){
         }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
     }
-    /////////
+    /*
     class CatTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -666,7 +678,9 @@ public void loda(){
             takePicture.setVisibility(View.VISIBLE);
 
         }
-    }   private boolean isNetworkAvailable() {
+    }
+     */
+     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -679,7 +693,7 @@ public void loda(){
 
 //////////////////////////////////////////////////////////////////////////////
 
-    class CatTask1 extends AsyncTask<Void, Void, Void> {
+ /*   class CatTask1 extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -768,7 +782,21 @@ public void loda(){
 
         }
     }
+*/public String toBase64() {
+     // Получаем изображение из ImageView
 
+
+     // Записываем изображение в поток байтов.
+     // При этом изображение можно сжать и / или перекодировать в другой формат.
+     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+     // Получаем изображение из потока в виде байтов
+     byte[] bytes = byteArrayOutputStream.toByteArray();
+
+     // Кодируем байты в строку Base64 и возвращаем
+     return Base64.encodeToString(bytes, Base64.DEFAULT);
+ }
 
 }
 

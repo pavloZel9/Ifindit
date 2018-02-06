@@ -572,12 +572,15 @@ public void loda(){
         u.setText("");
 
 
-
         Intent Intent3 = new Intent(MainActivity.this, Main5Activity.class);
       //  Intent3.putStringArrayListExtra("La_d", La_d);
         Intent3.putStringArrayListExtra("wb1", wb);
         String decode=toBase64();
+        getImageUri(this, bitmap);
         Intent3.putExtra("s",decode);
+
+        Log.d("decddddddd",getImageUri(this, bitmap).toString() );
+        Intent3.putExtra("ss",getImageUri(this, bitmap).toString() );
         Log.d("decod",decode);
        // Intent3.putExtra("fname", detectedText);
         startActivity(Intent3);
@@ -797,6 +800,11 @@ public void loda(){
      // Кодируем байты в строку Base64 и возвращаем
      return Base64.encodeToString(bytes, Base64.DEFAULT);
  }
-
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 }
 

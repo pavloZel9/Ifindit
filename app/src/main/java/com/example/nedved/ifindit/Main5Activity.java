@@ -1,9 +1,7 @@
 package com.example.nedved.ifindit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,11 +12,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 
-import java.util.ArrayList;
-public class Main5Activity extends AppCompatActivity {
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.util.ArrayList;
+
+public class Main5Activity extends AppCompatActivity {
+    private DefaultHttpClient mHttpClient;
     String h="";
     ArrayList<String> l1;
+    int g=0;int current;
     private WebView mWeb;
     private class WebViewer extends WebViewClient {
         @Override
@@ -30,6 +32,8 @@ public class Main5Activity extends AppCompatActivity {
     }
     String fName1;
     int a,m=0;
+    TabHost tabHost;
+    TabHost.TabSpec tabSpec;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,29 +54,16 @@ public class Main5Activity extends AppCompatActivity {
 
         setTitle("TabHost");
 
-        TabHost tabHost = (TabHost) findViewById(R.id.tabhost);
+        tabHost = (TabHost) findViewById(R.id.tabhost);
 
         tabHost.setup();
 
-        TabHost.TabSpec tabSpec = tabHost.newTabSpec("tag1");
 
-        tabSpec.setContent(R.id.tab1);
-        tabSpec.setIndicator("Поиск похожих картинок 1-й алгоритм");
-        tabHost.addTab(tabSpec);
-         String sh=getIntent().getStringExtra("s");
-        Log.d("decod",sh);
-
-//
-
-
-
-      mWeb.loadUrl("http://images.google.com/searchbyimage/upload&encoded_image="+sh);
-        mWeb.setWebViewClient(new Main5Activity.WebViewer());
 
 
         tabSpec = tabHost.newTabSpec("tag2");
         tabSpec.setContent(R.id.tab2);
-        tabSpec.setIndicator("Поиск похожих картинок 2-й алгоритм");
+        tabSpec.setIndicator("Похожие картинки");
         tabHost.addTab(tabSpec);
         ListView list2 = (ListView) findViewById(R.id.listv1);
         if (l1.size()<10){
@@ -104,10 +95,7 @@ public class Main5Activity extends AppCompatActivity {
 
         list2.setAdapter(adapter);
         registerForContextMenu(list2);
-        tabSpec = tabHost.newTabSpec("tag3");
-        tabSpec.setContent(R.id.tab3);
-        tabSpec.setIndicator("Котёнок");
-        tabHost.addTab(tabSpec);
+
 
         tabHost.setCurrentTab(0);
 
@@ -126,10 +114,33 @@ public class Main5Activity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.edit:
                 // метод, выполняющий действие при редактировании пункта меню
-                Intent Intent22 = new Intent(Main5Activity.this, Main4Activity.class);
+              //  Intent Intent22 = new Intent(Main5Activity.this, Main4Activity.class);
+                g++;
+                if(g<2){
+                tabSpec = tabHost.newTabSpec("tag1");
 
-                Intent22.putExtra("site", l1.get(info.position-1));
-                startActivity(Intent22);
+                tabSpec.setContent(R.id.tab1);
+                tabSpec.setIndicator("Сайти с похожей картинкой");
+                tabHost.addTab(tabSpec);
+
+                    current=g;
+
+                }
+                android.util.Log.d("decddddddd",Integer.toString(current) );
+                tabHost.setCurrentTab(current);
+     /*   Intent int1= new Intent(Intent.ACTION_SEND);
+        int1.setType("text/plain");
+        String shareBody ="df";
+        String sBody ="df1";
+        int1.putExtra(Intent.EXTRA_SUBJECT,shareBody);
+        int1.putExtra(Intent.EXTRA_TEXT,sBody);
+        startActivity(Intent.createChooser(int1,"mychooser"));*/
+
+
+                mWeb.loadUrl("https://www.google.com/searchbyimage?&image_url="+l1.get(info.position-1));
+                mWeb.setWebViewClient(new Main5Activity.WebViewer());
+               // Intent22.putExtra("site", l1.get(info.position-1));
+               // startActivity(Intent22);
                 return true;
             case R.id.delete:
                 //метод, выполняющий действие при удалении пункта меню
@@ -138,5 +149,8 @@ public class Main5Activity extends AppCompatActivity {
                 return super.onContextItemSelected(item);
         }
     }
+///////////////////////////////////////
+
+
 
 }

@@ -52,7 +52,6 @@ import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 import com.google.api.services.vision.v1.model.ImageProperties;
 import com.google.api.services.vision.v1.model.SafeSearchAnnotation;
-import com.googlecode.tesseract.android.TessBaseAPI;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -68,14 +67,14 @@ public class MainActivity extends AppCompatActivity  {
 
     private static final int RECORD_REQUEST_CODE = 101;
     private static final int CAMERA_REQUEST_CODE = 102;
-    private TessBaseAPI baseApi;
+    //private TessBaseAPI baseApi;
     private static final String CLOUD_VISION_API_KEY = "AIzaSyCDjbuo5V71t0ByASSLEubeOxgyndABoww";
 ////
 public static final String TESS_DATA = "/tessdata";
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/Tess";
     private TextView textView;
-    private TessBaseAPI tessBaseAPI;
+   // private TessBaseAPI tessBaseAPI;
     private Uri outputFileDir;
     private String mCurrentPhotoPath;
 

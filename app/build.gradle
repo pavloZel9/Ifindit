@@ -23,10 +23,7 @@ android {
 }
 
 dependencies {
-    compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
-    compile('org.apache.httpcomponents:httpmime:4.3') {
-        exclude module: "httpclient"
-    }
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -39,7 +36,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.rmtheis:tess-two:5.4.1'
-    compile 'com.loopj.android:android-async-http:1.4.9'
+
+
     compile 'com.google.android.gms:play-services-vision:9.8.0'
 }

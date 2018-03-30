@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="Project 'dice'" />
-    <option name="defaultScopeName" value="Project 'dice'" />
-    <option name="SEARCH_SCOPE" value="Project 'dice'" />
+    <option name="customScope" value="Directory '[GuitarTuner] - ...'" />
+    <option name="defaultScopeName" value="Directory '[GuitarTuner] - ...'" />
+    <option name="SEARCH_SCOPE" value="Directory '[GuitarTuner] - ...'" />
   </component>
 </application>
